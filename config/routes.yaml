@@ -1,0 +1,51 @@
+
+    
+
+
+add_task:
+    path: '/task/addtask'
+    controller: 'App\Controller\TasksController::addtask'
+    methods: ['POST']
+
+register_user:
+    path: '/register'
+    controller: 'App\Controller\RegistrationController::registeruser'
+    methods: ['POST']
+
+login_user:
+    path: '/user/login'
+    controller: 'App\Controller\UserLoginController::loginuser'
+    methods: ['POST']
+    
+view_task:
+    path: '/task/viewtask'
+    controller: 'App\Controller\TasksController::viewTaskAll'
+    methods: ['GET']
+    
+view_task_id:
+    path: '/task/{ids}'
+    controller: 'App\Controller\TasksController::viewTaskId'
+    methods: [ 'GET' ]
+    
+edit_task_id:
+    path: '/task/edit/{id}'
+    controller: 'App\Controller\TasksController::editTaskId'
+    methods: [ 'PUT' ]
+    
+delete_task_id:
+    path: '/task/delete/{id}'
+    controller: 'App\Controller\TasksController::deleteTask'
+    methods: [ 'DELETE' ]
+    
+assign_task:
+    path: '/task/assign-task'
+    controller: 'App\Controller\TasksController::assignTaskToUser'
+    methods: [ 'POST' ]
+    
+delete_user:
+    path: '/user/delete/{id}'
+    controller: 'App\Controller\UserController::deleteUser'
+    methods: [ 'DELETE' ]
+
+    
+
