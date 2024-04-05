@@ -42,6 +42,7 @@ security:
          - { path: ^/task/delete, roles: ROLE_ADMIN }
          - { path: ^/task/assign-task, roles: ROLE_ADMIN }
          - { path: ^/user/delete, roles: ROLE_ADMIN }
+         - { path: ^/user/edit, roles: [ROLE_ADMIN, ROLE_USER] }
         # - { path: ^/profile, roles: ROLE_USER }
          - { path: ^/task, roles: IS_AUTHENTICATED_FULLY }
     

@@ -30,10 +30,6 @@ class UserLoginController extends AbstractController
         $token = $this->generateToken->generateToken($user);
 
 
-        //$response =  $this->json(['user'=>$user->getUsername(),
-          //           'token'=>$token ]);
-
-
         $response = $this->json([]);
         $response->headers->set('Authorization', 'Bearer '.$token);
 

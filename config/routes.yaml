@@ -46,6 +46,11 @@ delete_user:
     path: '/user/delete/{id}'
     controller: 'App\Controller\UserController::deleteUser'
     methods: [ 'DELETE' ]
+    
+edit_user:
+    path: '/user/edit/{id}'
+    controller: 'App\Controller\UserController::editUserById'
+    methods: [ 'PUT' ]
 
     
 

@@ -49,7 +49,7 @@ class TaskService
 
     }
 
-    public function viewAllTask(#[CurrentUser] ?User $user, int $page=1, int $limit=5 ): array
+    public function viewAllTask(#[CurrentUser] ?User $user ): array
     {
 
 
