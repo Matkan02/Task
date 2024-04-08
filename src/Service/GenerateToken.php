@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Service;
 
 
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class GenerateToken
 {

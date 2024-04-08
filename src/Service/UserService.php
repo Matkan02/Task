@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -43,7 +44,7 @@ class UserService
             throw new NoneId('Password cannot be empty');
         }
 
-        if (strlen( $newPassword <= 5) || !preg_match("/^(?=.*[\W_]).+$/",$newPassword))
+        if (strlen((string)$newPassword ) <= 5 || !preg_match("/^(?=.*[\W_]).+$/",$newPassword))
         {
             throw new InvalidArgumentException('Password must be at least 5 characters and one special character !!');
         }

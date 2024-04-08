@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -61,7 +62,7 @@ class RegistrationService
 
         $wrongPassword = $userData['password'];
 
-        if (strlen( $wrongPassword <= 5) || !preg_match("/^(?=.*[\W_]).+$/",$wrongPassword))
+        if (strlen((string) $wrongPassword ) <= 5 || !preg_match("/^(?=.*[\W_]).+$/",$wrongPassword))
         {
             throw new InvalidArgumentException('must be at least 5 characters and one special character !!');
         }
