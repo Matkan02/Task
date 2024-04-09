@@ -6,11 +6,9 @@ namespace App\Controller;
 use App\EmptyException;
 use App\NoneId;
 use App\Service\TaskService;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,21 +18,15 @@ use Symfony\Component\Routing\Attribute\Route;
 class TasksController extends AbstractController
 {
     private $taskService;
-    private $security;
 
-    public function __construct(TaskService $taskService, Security $security)
+    public function __construct(TaskService $taskService)
     {
         $this->taskService = $taskService;
-        $this->security = $security;
     }
     #[Route('/task/addtask', name: 'app_task',methods:['POST'])]
     public function addTask(Request $request): JsonResponse
     {
 
-        if ($this->security->isGranted('ROLE_ADMIN'))
-        {
-            throw new JsonException('forbidden access',Response::HTTP_FORBIDDEN);
-        }
 
         $data = json_decode($request->getContent(),true);
 
@@ -73,19 +65,17 @@ class TasksController extends AbstractController
         $tasks = [];
         foreach ($idsArray as $id)
         {
-            if (!is_numeric($id))
+           if (!is_numeric($id))
             {
                 return $this->json(['error'=>'Invalid Id'],Response::HTTP_BAD_REQUEST);
             }
-
             $task = $this->taskService->viewTaskById((int)$id);
 
             if (isset($task['error']))
             {
                 return $this->json($task,Response::HTTP_NOT_FOUND);
             }
-            $tasks [] = $task;
-
+                $tasks [] = $task;
         }
         return $this->json($tasks);
     }
