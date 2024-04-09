@@ -52,5 +52,9 @@ edit_user:
     controller: 'App\Controller\UserController::editUserById'
     methods: [ 'PUT' ]
 
+logout_user:
+    path: '/user/logout'
+    controller: 'App\Controller\UserLoginController::logoutUser'
+    methods: [ 'POST' ]
     
 

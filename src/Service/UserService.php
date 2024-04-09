@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\CannotChangePassword;
 use App\EmptyException;
 use App\Entity\User;
 use App\NoneId;
 use App\BadReq;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class UserService
 {
@@ -35,8 +38,13 @@ class UserService
         $this->entityManager->flush();
     }
 
-    public function editUser(int $userId, $newPassword): void
+    public function editUser(int $userId, $newPassword, #[CurrentUser] ?User $user): void
     {
+
+        if ($user->getId() !== $userId )
+        {
+            throw new CannotChangePassword('Cannot change password another user');
+        }
         $userEdit = $this->entityManager->getRepository(User::class)->find($userId);
 
         if(empty($newPassword))
@@ -56,7 +64,6 @@ class UserService
         }
 
         $encodePassword = $this->encodePassword->hashPassword($userEdit,$newPassword);
-
 
         $userEdit->setPassword($encodePassword);
 
