@@ -65,24 +65,44 @@ class TaskService
 
 
         $tasks = [];
-        foreach ($taskData as $task)
+        if (count($taskData) > 0)
         {
-            $tasks[] = [
-                'title'=>$task->getTitle(),
-                'description'=>$task->getDescription()
+            foreach ($taskData as $task)
+            {
+                $tasksInf = [
+                    'title'=>$task->getTitle(),
+                    'description'=>$task->getDescription()
+                ];
+
+                if (!in_array('ROLE_ADMIN',$user->getRoles(),true))
+                {
+                    $countAssigned = $user->getTasksUser()->count();
+                    $tasksInf['assigned-tasks'] = $countAssigned;
+                }
+                $tasks[]= $tasksInf;
+            }
+        }
+        else
+        {
+            $tasks [] = [
+                'title'=>'',
+                'description'=>''
             ];
         }
+
         return $tasks;
 
     }
 
     public function viewTaskById(int $taskId): array
     {
+
       $tasksBYId = $this->entityManager->getRepository(Tasks::class)->find($taskId);
       if ($tasksBYId === null)
       {
           return ['error'=>'Tasks not found'];
       }
+
        $tasks = [
            'title'=>$tasksBYId->getTitle() ,
            'description'=>$tasksBYId->getDescription()

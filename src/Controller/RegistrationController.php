@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-
+//admin: mateusz mateusz!
 class RegistrationController extends AbstractController
 {
 
