@@ -23,7 +23,7 @@ class TasksController extends AbstractController
     {
         $this->taskService = $taskService;
     }
-    #[Route('/task/addtask', name: 'app_task',methods:['POST'])]
+    #[Route('/task/addtask', name: 'add_task',methods:['POST'])]
     public function addTask(Request $request): JsonResponse
     {
 

@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     {
         $this->registrationService = $registrationService;
     }
-    #[Route('/register', name: 'app_registration', methods: 'POST')]
+    #[Route('/register', name: 'registration', methods: 'POST')]
     public function registeruser(Request $request): JsonResponse
     {
         $userdata = json_decode($request->getContent(),true);

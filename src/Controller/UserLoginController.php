@@ -22,7 +22,7 @@ class UserLoginController extends AbstractController
      $this->tokenStorage = $tokenStorage;
     }
 
-    #[Route('/user/login', name: 'app_user_login', methods: 'POST')]
+    #[Route('/user/login', name: 'user_login', methods: 'POST')]
     public function loginUser(#[CurrentUser] ?User $user): JsonResponse
     {
         if($user === null)
@@ -39,7 +39,7 @@ class UserLoginController extends AbstractController
         return $response;
     }
 
-    #[Route('/user/logout', name: 'app_user_logout', methods: 'POST')]
+    #[Route('/user/logout', name: 'user_logout', methods: 'POST')]
     public function logoutUser(#[CurrentUser] ?User $user):JsonResponse
     {
         $userToken = $this->tokenStorage->getToken();

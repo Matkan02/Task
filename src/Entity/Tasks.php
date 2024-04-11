@@ -32,12 +32,12 @@ class Tasks
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(?string $title): static
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
