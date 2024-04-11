@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
-use Symfony\Flex\Response;
-
 class UserLoginController extends AbstractController
 {
     private  $generateToken;

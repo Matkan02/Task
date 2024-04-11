@@ -26,15 +26,15 @@ class TaskService
 
         if (empty($taskData['title']))
         {
-            //return new JsonResponse(['error'=>'Title cannot be empty'],Response::HTTP_BAD_REQUEST);
+
             throw new InvalidArgumentException('Title cannot be empty');
         }
 
-        $existingtask = $this->entityManager->getRepository(Tasks::class)->findOneBy(['title' => $taskData['title']]);
+        $existingTask = $this->entityManager->getRepository(Tasks::class)->findOneBy(['title' => $taskData['title']]);
 
-        if ($existingtask !== null)
+        if ($existingTask !== null)
         {
-            //return new JsonResponse(['error'=>'Task with the name already exists'],Response::HTTP_CONFLICT);
+
             throw new ConflictHttpException('Task with the name already exists');
         }
 
@@ -69,7 +69,7 @@ class TaskService
         {
             foreach ($taskData as $task)
             {
-                $tasksInf = [
+                $tasksTab = [
                     'title'=>$task->getTitle(),
                     'description'=>$task->getDescription()
                 ];
@@ -77,9 +77,9 @@ class TaskService
                 if (!in_array('ROLE_ADMIN',$user->getRoles(),true))
                 {
                     $countAssigned = $user->getTasksUser()->count();
-                    $tasksInf['assigned-tasks'] = $countAssigned;
+                    $tasksTab['assigned-tasks'] = $countAssigned;
                 }
-                $tasks[]= $tasksInf;
+                $tasks[]= $tasksTab;
             }
         }
         else

@@ -10,7 +10,6 @@ use App\NoneId;
 use App\BadReq;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 

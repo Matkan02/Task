@@ -46,16 +46,16 @@ class RegistrationService
             ->getQuery()
             ->getResult();
 
-        $isadmin = false;
+        $isAdmin = false;
         foreach ($users as $userObj)
         {
             $roles = $userObj->getRoles();
             if (in_array('ROLE_ADMIN', $roles, true)) {
-                $isadmin = true;
+                $isAdmin = true;
         }
         }
 
-        if($isadmin)
+        if($isAdmin)
         {
             $user->setRoles(['ROLE_USER']);
         }
