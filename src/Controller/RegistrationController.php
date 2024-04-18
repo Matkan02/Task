@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 
@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -30,18 +31,18 @@ class RegistrationController extends AbstractController
 
         try {
             $user = $this->registrationService->register($userdata);
-            return $this->json($user, JsonResponse::HTTP_CREATED);
+            return $this->json($user, Response::HTTP_CREATED);
         }catch (InvalidArgumentException $e)
         {
-            return $this->json(['error'=>$e->getMessage()],JsonResponse::HTTP_BAD_REQUEST);
+            return $this->json(['error'=>$e->getMessage()],Response::HTTP_BAD_REQUEST);
         }
         catch (ConflictHttpException $e)
         {
-            return $this->json(['error'=>$e->getMessage()],JsonResponse::HTTP_CONFLICT);
+            return $this->json(['error'=>$e->getMessage()],Response::HTTP_CONFLICT);
         }
         catch (Exception $e)
         {
-            return $this->json(['error'=>$e->getMessage()],JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->json(['error'=>$e->getMessage()],Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
 

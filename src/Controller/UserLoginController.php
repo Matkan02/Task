@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\HttpFoundation\Response;
+
 class UserLoginController extends AbstractController
 {
     private  $generateToken;
@@ -20,15 +22,19 @@ class UserLoginController extends AbstractController
      $this->tokenStorage = $tokenStorage;
     }
 
+
     #[Route('/user/login', name: 'user_login', methods: 'POST')]
     public function loginUser(#[CurrentUser] ?User $user): JsonResponse
     {
         if($user === null)
         {
-            return $this->json(['error'=>'Not Authorized'],JsonResponse::HTTP_UNAUTHORIZED);
+            return $this->json(['error'=>'Not Authorized'],Response::HTTP_UNAUTHORIZED);
         }
 
-        $token = $this->generateToken->generateToken($user);
+
+            $token = $this->generateToken->generateToken($user);
+
+
 
 
         $response = $this->json([]);
@@ -47,7 +53,7 @@ class UserLoginController extends AbstractController
             $this->tokenStorage->setToken(null);
             return $this->json(['message'=>'Logout successfull !!']);
         }
-        return $this->json(['message' => 'User is not logged'], JsonResponse::HTTP_UNAUTHORIZED);
+        return $this->json(['message' => 'User is not logged'], Response::HTTP_UNAUTHORIZED);
     }
 
 }

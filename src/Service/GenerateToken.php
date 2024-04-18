@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class GenerateToken
 {
@@ -19,11 +20,10 @@ class GenerateToken
     {
         try {
             $token = $this->jwtManager->create($user);
-        }catch (\Exception $e)
+        }catch (AuthenticationException $e)
         {
-            throw new \Exception('Failed to generate JWT token: ' . $e->getMessage());
+            throw new AuthenticationException('Failed to generate token: '.$e->getMessage());
         }
-
         return $token;
     }
 
