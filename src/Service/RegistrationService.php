@@ -40,11 +40,13 @@ class RegistrationService
         $user->setUsername($userData['username']);
 
 
-        $qb = $this->entityManager->createQueryBuilder();
+       /* $qb = $this->entityManager->createQueryBuilder();
         $users = $qb->select('u')
-            ->from(User::class, 'u')
+           ->from(User::class, 'u')
             ->getQuery()
-            ->getResult();
+            ->getResult();*/
+
+        $users = $this->entityManager->getRepository(User::class)->findAll();
 
         $isAdmin = false;
         foreach ($users as $userObj)
